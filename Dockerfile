@@ -1,9 +1,9 @@
 FROM alpine/git:2.47.2 AS code
 WORKDIR /code
-RUN git clone https://github.com/chubbyhippo/spring-boot-web-hello-maven-java.git app
+RUN git clone https://github.com/chubbyhippo/spring-boot-web-hello-maven-java.git ./
 
 FROM bellsoft/liberica-openjdk-alpine:21-cds AS builder
-COPY --from=code /code/app /builder
+COPY --from=code /code /builder
 WORKDIR /builder
 RUN chmod +x mvnw
 RUN ./mvnw package
