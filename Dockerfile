@@ -7,8 +7,7 @@ COPY --from=code /code/app /builder
 WORKDIR /builder
 RUN chmod +x mvnw
 RUN ./mvnw package
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} application.jar
+RUN cp /builder/target/*.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
 FROM bellsoft/liberica-openjre-alpine:21-cds
